@@ -10,7 +10,7 @@ export interface Refs {
     [key: string]: Ref
 }
 
-const useFirestoreLink = <T extends any>(firestore: any, colName, refs: Ref | null = null) => {
+const useFirestoreLink = <T extends any>(firestore: any, colName: string, refs: Ref | null = null) => {
     const [col, loading, error] = useCollection(
         firestore().collection(colName)
     );
@@ -69,11 +69,20 @@ const useFirestoreLink = <T extends any>(firestore: any, colName, refs: Ref | nu
                     .then((s: any) => editItem.update({id: s.id}));
             }
         },
-        delete: () =>
-            firestore()
-                .collection(colName)
-                .doc(editItem.value.id)
-                .delete()
+        delete: (id?: string) => {
+            const itemId = id || editItem.value.id;
+            if(itemId){
+                return firestore()
+                    .collection(colName)
+                    .doc(editItem.value.id)
+                    .delete()
+            }else{
+                console.error(`Could't remove item, because editItem.value.id or id is not set`)
+            }
+
+        }
+
+
     };
 };
 
