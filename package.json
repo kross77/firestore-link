@@ -21,6 +21,8 @@
   },
   "scripts": {
     "start": "tsdx watch",
+    "p": "npm publish --access public",
+    "clone": ". ./clone.sh $1",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
