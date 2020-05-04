@@ -1,19 +1,11 @@
 import React, {useEffect} from 'react';
+import {Text} from 'react-native';
 import Layout from '@kross77/react-native-layout';
 import useFirestoreLink from '../src';
 import firebase from 'firebase';
 
-
-const config = {
-    apiKey: "AIzaSyAvevNA9EeAGTZIdpEpGSWS7UGZjnC9qz8",
-    authDomain: "mobietu-fi-dev.firebaseapp.com",
-    databaseURL: "https://mobietu-fi-dev.firebaseio.com",
-    projectId: "mobietu-fi-dev",
-    storageBucket: "mobietu-fi-dev.appspot.com",
-    messagingSenderId: "462403576246",
-    appId: "1:462403576246:web:7937f7ec40bf63e65c2117",
-    measurementId: "G-SD7M6ZKWSM"
-};
+console.log({env: process.env})
+const config = JSON.parse(process.env.STORYBOOK_FIREBASE_CONFIG);
 
 
 if (firebase.apps.length === 0) {
@@ -67,6 +59,21 @@ export const Edit = (props: any) => {
                     {testLink.data ? testLink.data.map(({name}: any) => <h5 key={name}>{name}</h5>) : "Loading"}
                 </div>
             </Layout>
+        </Layout>
+    )
+};
+
+
+export const Restaurants = (props: any) => {
+    const restaurantsLink = useFirestoreLink(firebase.firestore, 'restaurants', {
+        //@ts-ignore
+        organization: ['organization_id', 'organizations'],
+    });
+
+
+    return (
+        <Layout w h={'100vh'} ac jc>
+            <Text>{JSON.stringify(restaurantsLink.data)}</Text>
         </Layout>
     )
 };

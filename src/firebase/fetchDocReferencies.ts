@@ -19,7 +19,7 @@ const fetchDocReferences = async (d: any) => {
         }
         return d;
     }, doc);
-    return docs;
+    return {...docs, id: d.id};
 };
 
 export default fetchDocReferences;

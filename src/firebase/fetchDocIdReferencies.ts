@@ -29,7 +29,7 @@ const fetchDocIdReferences = (refs: Refs, firestore: any) => async (d: any) => {
     values.forEach(([key, value]: any) => {
         doc[key] = value;
     });
-    return {id:d.id, ...doc};
+    return {id: d.id, ...doc};
 };
 
 export default fetchDocIdReferences;

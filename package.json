@@ -27,7 +27,7 @@
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "STORYBOOK_FIREBASE_CONFIG=$FIREBASE_CONFIG start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
